@@ -1,0 +1,26 @@
+version: '2'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/superapp
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php
+  php:
+    image: php:7-fpm
+    volumes:
+      - ./:/var/www/superapp
+#  mysql:
+#    image: mysql:5.7
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_NAME: superapp
+#      MYSQL_USER: superapp
+#      MYSQL_PASS: superapp
+#    volumes:
+#      - /var/lib/mysql
+#    networks:
+#      - appnet
